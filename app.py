@@ -13,7 +13,7 @@ class App(tk.Tk):
         self.fileName = None
         tk.Tk.__init__(self)
         self.title('CMPT 365 Final Project')
-        self.geometry("580x380")
+        self.minsize(580, 380)
         load = Image.open("./images/white.jpg")
         render = ImageTk.PhotoImage(load)
         self.img = Label(self, image=render)
@@ -62,6 +62,7 @@ class App(tk.Tk):
 
     def updateImage(self, jpg):
         load = Image.open(jpg)
+        load = load.resize((250, 250), Image.ANTIALIAS)
         render = ImageTk.PhotoImage(load)
         self.img.configure(image = render)
         self.img.photo_ref = render

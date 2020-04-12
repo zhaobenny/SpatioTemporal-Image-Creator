@@ -1,6 +1,4 @@
 
-
-
 import cv2
 import numpy
 
@@ -11,13 +9,10 @@ class STI:
         self.video = cv2.VideoCapture(path)
 
 
+        # Adjust if needed
         self.videoWidth  = 64
         self.videoHeight  = 64
         self.threshold = 0.3
-
-        # Uncomment below for slower processing
-        # self.videoWidth  = int(self.video.get((cv2.CAP_PROP_FRAME_WIDTH)))
-        # self.videoHeight  = int(self.video.get((cv2.CAP_PROP_FRAME_HEIGHT)))
 
         self.totalFrames = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
         self.bins = numpy.floor(1 + numpy.log2(self.videoHeight)).astype(int)
@@ -31,6 +26,7 @@ class STI:
             self.frameCounter += 1
             hasFrames, image = self.video.read()
             if hasFrames:
+                image = cv2.resize(image, (self.videoHeight, self.videoWidth))
                 for i in range(self.videoHeight):
                     bluePixel, greenPixel, redPixel = image[i][middleCol]
                     columnSTI[i][self.frameCounter-1] = [bluePixel, greenPixel, redPixel]
@@ -46,6 +42,7 @@ class STI:
             self.frameCounter += 1
             hasFrames, image = self.video.read()
             if hasFrames:
+                image = cv2.resize(image, (self.videoHeight, self.videoWidth))
                 for i in range(self.videoWidth):
                     bluePixel, greenPixel, redPixel = image[middleRow][i]
                     rowSTI[i][self.frameCounter-1] = [bluePixel, greenPixel, redPixel]
@@ -65,6 +62,7 @@ class STI:
             self.frameCounter += 1
             hasFrames, image = self.video.read()
             if hasFrames:
+                image = cv2.resize(image, (self.videoHeight, self.videoWidth))
                 pastFrameHist = newPastFrameHist
                 newPastFrameHist = []
                 rg =  numpy.zeros( (self.videoWidth + 1, self.videoHeight + 1, 3), dtype=numpy.uint8)
