@@ -23,9 +23,9 @@ class App(tk.Tk):
         self.open.grid(row = 1, column = 1)
         self.getHistogram = tk.Button(self, text='Run Histogram Difference', width=25, command=self.runHistogram)
         self.getHistogram.grid(row = 1, column = 2)
-        self.getMiddleCol = tk.Button(self, text='Run Middle Col', width=9, command=self.runMiddleCol)
+        self.getMiddleCol = tk.Button(self, text='Run Middle Col', width=15, command=self.runMiddleCol)
         self.getMiddleCol.grid(row = 1, column = 3)
-        self.getMiddleRow = tk.Button(self, text='Run Middle Row', width=10, command=self.runMiddleRow)
+        self.getMiddleRow = tk.Button(self, text='Run Middle Row', width=15, command=self.runMiddleRow)
         self.getMiddleRow.grid(row = 1, column = 4)
         self.rowconfigure(0, weight=2)
 
